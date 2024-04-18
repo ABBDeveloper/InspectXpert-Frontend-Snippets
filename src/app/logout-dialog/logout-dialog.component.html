@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Abmelden</h2>
+<div class="mat-typography">
+    <h3>App verlassen?</h3>
+</div>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Abbrechen</button>
+    <button 
+        mat-button  
+        cdkFocusInitial   
+        mat-dialog-close
+        (click)="onLogout()">Abmelden</button>
+</mat-dialog-actions>
+

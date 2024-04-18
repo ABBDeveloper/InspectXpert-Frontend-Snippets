@@ -1,0 +1,53 @@
+.car-card {
+    display: grid;
+    grid-template-rows: 50% 1fr;
+    width: 16.5rem;
+    height: 22rem;
+    border-radius: 10px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+img{
+    height: 100%;
+    width: 100%;
+    object-fit:cover ; /* Dies sorgt dafür, dass das Bild den Container füllt, ohne sein Seitenverhältnis zu verzerren */
+}
+
+.car-name{
+    padding: 1rem;
+
+    h3{
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+}
+
+
+
+.car-card:hover .card-thumbnail{
+    filter: grayscale(100%) blur(1px); /* Macht das Element schwarz-weiß und unscharf */
+}
+
+.car-card:hover {
+    transition: filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-general-info-label{
+    font-weight: 400;
+    margin: 0%;
+}
+
+.car-general-info-value{
+    font-weight: 300;
+    margin: 0%;
+}
+
+.car-info-container{
+    display: flex;
+    justify-content: space-between;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    margin: 0%;
+    padding: 0 0 3px 0;
+}

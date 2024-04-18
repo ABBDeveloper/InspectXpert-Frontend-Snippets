@@ -1,0 +1,49 @@
+<div class="all-inspections-container" *ngIf="(filteredInspections$ | async) as inspections">
+    <div class="toolbar">
+        <div class="inspection-count">
+            <p class="label">Inspektionen insgesamt: {{ inspections.length }}</p>
+        </div>
+        <div id="search-container">
+            <p class="label">Suche nach:</p>
+            <div id="search-filter">
+                <mat-select  [(ngModel)]="selectedSearchField" (ngModelChange)="onFieldChange($event)" name="option">
+                    <mat-option *ngFor="let option of searchOptions" [value]="option.value">{{option.name}}</mat-option>
+                </mat-select>
+            </div>
+            <div id="search-input-container">
+                <input id="search-input" type="text" [(ngModel)]="searchTerm" placeholder="Suche nach Inspektionen..." (ngModelChange)="search()">
+                <img id="search-icon" src="assets/images/icons/search.svg" alt=""> 
+            </div>
+        </div>
+
+        <div id="view-options">
+            <button (click)="activateListMode()" class="view-option-btn" [ngClass]="{'view-option-selected': !gridMode}">
+                <img src="assets/images/icons/list.svg" alt=""> 
+            </button>
+            <button (click)="activateGridMode()" class="view-option-btn" [ngClass]="{'view-option-selected': gridMode}">
+                <img src="assets/images/icons/grid.svg" alt=""> 
+            </button>
+        </div>
+    </div>
+
+    <mat-card class="card-inspection-list-header" *ngIf="!gridMode">
+        <mat-card-content class="inspection-list-header">
+            <p class="car-general-info-label">Marke</p>
+            <p class="car-general-info-label">Model</p>
+            <p class="car-general-info-label">Baujahr</p>
+            <p class="car-general-info-label">Kilometerstand</p>
+            <p class="car-general-info-label">Fahrgest.Nr.</p>
+            <p class="car-general-info-label">Kennzeichen</p>
+            <p class="car-general-info-label">Unters.-datum</p>
+        </mat-card-content>
+    </mat-card>
+    <div class="all-inspections" [ngClass]="{'grid-view': gridMode}">
+        <div *ngFor="let inspection of inspections">
+            <inspection-card *ngIf="gridMode" [inspection]="inspection"></inspection-card>
+            <inspection-list-item *ngIf="!gridMode"  [inspection]="inspection"></inspection-list-item>
+        </div>
+        <div id="inspections-not-found" *ngIf="inspections.length == 0">
+            <p>Es wurden keine Inspectionen gefunden.</p>
+        </div>
+    </div>
+</div>

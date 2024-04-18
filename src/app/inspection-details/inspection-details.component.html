@@ -1,0 +1,525 @@
+<div class="inspection-details-wrapper">
+  <div *ngIf="inspection && inspection.inspectionPhotos" class="inspection-details">
+    <div class="inspection-details-toolbar">
+      <div id="toolbar-inspection-status">
+        <p class="inspection-status" id="status-lable">Zustand:</p>
+        &nbsp;
+        <p 
+          class="inspection-status" 
+          id="status-value" 
+          [ngClass]="{ 
+            'status-fahrtuechtig': getVehicleStatus() === 'Fahrtüchtig',
+            'status-reparaturbeduerftig': getVehicleStatus() === 'Reparaturbedürftig',
+            'status-nichtfahrtuechtig': getVehicleStatus() === 'Nicht fahrtüchtig' }"
+      >{{getVehicleStatus()}}</p>
+      </div>
+
+      <div id="toolbar-button-actios">
+        <button class="toolbar-button" (click)="createPdfReport()">
+          <img src="assets/images/icons/pdf.svg" alt="">
+        </button>
+        <button class="toolbar-button" (click)="printReport(inspection.id)">
+          <img src="assets/images/icons/print.svg" alt="">
+        </button>
+        <button class="toolbar-button" (click)="editInspection()">
+          <img src="assets/images/icons/edit.svg" alt="">
+        </button>
+        <button class="toolbar-button" (click)="deleteInspection(inspection.id)">
+          <img src="assets/images/icons/trash.svg" alt="">
+        </button>
+      </div>
+      
+    </div>
+    
+    <div class="stage-area">
+      <app-photo-carousel id="photo-carousel" [photos]= photos></app-photo-carousel>
+      <div class="car-info">
+        <h1 class="car-info-brand-and-model">
+          {{inspection.manufacturer}} {{inspection.model}}
+        </h1>
+      
+        <div class="car-general-info">
+          <div class="car-general-info-item">
+            <div class="car-general-info-item-icon">
+              <img src="assets/images/icons/calendar-alt-svgrepo-com.svg" alt="">
+            </div>
+            <p class="car-general-info-item-label">Erstzulassung</p> 
+            <div></div>
+            <p class="car-general-info-item-value"> {{ inspection.construction_year }}</p>
+          </div>
+
+          <div class="car-general-info-item">   
+            <div class="car-general-info-item-icon">       
+              <img src="assets/images/icons/road-with-broken-lines-svgrepo-com.svg" alt="">
+            </div>
+            <p class="car-general-info-item-label">Kilometerstand</p> 
+            <div></div>
+            <p class="car-general-info-item-value"> {{ inspection.mileage }} km</p>
+          </div>
+
+          <div class="car-general-info-item">
+            <div class="car-general-info-item-icon">
+            <img src="assets/images/icons/chassis-svgrepo-com.svg" alt="">
+            </div>
+            <p class="car-general-info-item-label">Fahrgestellnummer</p> 
+            <div></div>
+            <p class="car-general-info-item-value"> {{ inspection.chassis_number }}</p>
+          </div>
+
+          <div class="car-general-info-item">
+            <div class="car-general-info-item-icon">
+              <img src="assets/images/icons/license-plate-number-svgrepo-com.svg" alt="">
+            </div>
+            <p class="car-general-info-item-label">Kennzeichen</p> 
+            <div></div>
+            <p class="car-general-info-item-value"> {{ inspection.license_plate }}</p>
+          </div>
+
+          <div class="car-general-info-item">
+            <div class="car-general-info-item-icon">
+              <img src="assets/images/icons/person-svgrepo-com.svg" alt="">
+            </div>
+            <p class="car-general-info-item-label">Prüfer</p> 
+            <div></div>
+            <p class="car-general-info-item-value"> {{ inspection.inspector }} Armin B.</p>
+          </div>
+
+          <div class="car-general-info-item">
+            <div class="car-general-info-item-icon">
+              <img src="assets/images/icons/time-calendar-search-date-event-planner-task-icon-svgrepo-com.svg" alt="">
+            </div>
+            <p class="car-general-info-item-label">Unterschucht am: </p> 
+            <div></div>
+            <p class="car-general-info-item-value"> {{ inspection.inspection_date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="car-details">
+      <!-- MOTOR -->
+      <div class="car-detail-section">
+        <div class="car-detail-section-title">
+          <div class="car-detail-section-title-icon">
+            <img class="svg-icon" src="assets/images/icons/engine-motor-svgrepo-com.svg">
+          </div>
+          <div class="car-detail-section-title-text">
+            <h2>Motor</h2>
+          </div>
+        </div>
+        <div class="car-detail-section-content">
+
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Selektive katalytische Reduktion (SCR)</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]=inspection.selektive_katalytische_reduktion_scr ></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+    
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Motoröl</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.motor_ol></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+    
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Ölfilter</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.olfilter></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+    
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Kühlsystem</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.kuhlsystem></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+    
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Kraftstofffilter</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.kraftstofffilter></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+    
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Luftfilter</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.luftfilter></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      <!-- GETRIEBE -->
+      <div class="car-detail-section">
+        <div class="car-detail-section-title">
+          <div class="car-detail-section-title-icon">
+            <img class="svg-icon" src="assets/images/icons/gearshift-shift-svgrepo-com.svg">
+          </div>
+          <div class="car-detail-section-title-text">
+            <h2>Getriebe</h2>
+          </div>
+        </div>
+        <div class="car-detail-section-content">
+
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Getriebe</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.getriebe></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Achsmanschetten</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.achsmanschetten></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Gelenkwelle</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.gelenkwelle></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>  
+      
+      <!-- BREMSEN-->
+      <div class="car-detail-section">
+        <div class="car-detail-section-title">
+          <div class="car-detail-section-title-icon">
+            <img class="svg-icon" src="assets/images/icons/brake-system-warning-svgrepo-com.svg">
+          </div>
+          <div class="car-detail-section-title-text">
+            <h2>Bremsen</h2>
+          </div>
+        </div>
+        <div class="car-detail-section-content">
+            <!-- hier fehlt im DTO die  Bremsflüßigkeit-->
+
+        <div class="car-detail-section-content-item">
+          <div class="car-detail-section-label">
+            <p>Bremsflüßigkeit</p>
+          </div>
+          <div class="car-detail-section-value">
+            <inspection-detail-status-icon [inspectionDetailStatus]= inspection.bremsanlage></inspection-detail-status-icon>
+          </div>
+        </div>
+        
+        <div class="car-detail-section-content-item">
+          <div class="car-detail-section-label">
+            <p>Bremsanlage</p>
+          </div>
+          <div class="car-detail-section-value">
+            <inspection-detail-status-icon [inspectionDetailStatus]= inspection.bremsanlage></inspection-detail-status-icon>
+          </div>
+        </div>
+        
+        <div class="car-detail-section-content-item">
+          <div class="car-detail-section-label">
+            <p>Bremswirkung</p>
+          </div>
+          <div class="car-detail-section-value">
+            <inspection-detail-status-icon [inspectionDetailStatus]= inspection.bremswirkung></inspection-detail-status-icon>
+          </div>
+        </div>
+        
+        <div class="car-detail-section-content-item">
+          <div class="car-detail-section-label">
+            <p>Bremsstärke</p>
+          </div>
+          <div class="car-detail-section-value">
+            <inspection-detail-status-icon [inspectionDetailStatus]= inspection.bremsstarke></inspection-detail-status-icon>
+          </div>
+        </div>
+
+        <div class="car-detail-section-content-item">
+          <div class="car-detail-section-label">
+            <p>Scheibenbremsen</p>
+          </div>
+          <div class="car-detail-section-value">
+            <inspection-detail-status-icon [inspectionDetailStatus]= inspection.bcheibenbremsen></inspection-detail-status-icon>
+          </div>
+        </div>
+        
+        <div class="car-detail-section-content-item">
+          <div class="car-detail-section-label">
+            <p>Leitungen, Schläuche und Anschlüße</p>
+          </div>
+          <div class="car-detail-section-value">
+            <inspection-detail-status-icon [inspectionDetailStatus]= inspection.schlauche_und_anschlusse></inspection-detail-status-icon>
+          </div>
+        </div>
+        
+        </div>
+        
+      </div>
+
+      <!-- AUFGÄNGUNG, RÄDER, BEREIFUNG -->
+      <div class="car-detail-section">
+        <div class="car-detail-section-title">
+          <div class="car-detail-section-title-icon">
+            <img class="svg-icon" src="assets/images/icons/wheel-svgrepo-com.svg">
+          </div>
+          <div class="car-detail-section-title-text">
+            <h2>Aufhängung, Räder und Bereifung</h2>
+          </div>
+        </div>
+        <div class="car-detail-section-content">
+
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Profiltiefe und Verschleißmuster</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.profiltiefe_und_verschleissmuster></inspection-detail-status-icon>
+            </div>
+          </div>
+        
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Aufhängung</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.aufhangung></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Stoßdämpfer</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.stossdampfer></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Kugelgelenke</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.kugelgelenke></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Reifendruck</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.reifendruck></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+
+      <!-- ELEKTRISCHE ANLAGE -->
+      <div class="car-detail-section">
+        <div class="car-detail-section-title">
+          <div class="car-detail-section-title-icon">
+            <img class="svg-icon" src="assets/images/icons/bolt.svg">
+          </div>
+          <div class="car-detail-section-title-text">
+            <h2>Elektrische Anlage</h2>
+          </div>
+        </div>
+        <div class="car-detail-section-content">
+
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Anlasser</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.anlasser></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Außenleuchten</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.aussenleuchten></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Scheinwerfen Ausrichtung</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.scheinwerfen_ausrichtung></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Kofferraumbeleuchtung</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.kofferraumbeleuchtung></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Hupe</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.hupe></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+
+      <!-- INNENRAUM   FEHLT!!!!-->
+      <!--     <div class="car-detail-section">
+        <div class="car-detail-section-title">
+          <div class="car-detail-section-title-icon">
+            <img class="svg-icon" src="assets/images/icons/car-sport-outline-svgrepo-com.svg">
+          </div>
+          <div class="car-detail-section-title-text">
+            <h2>Innenraum</h2>
+          </div>
+        </div>
+        <div class="car-detail-section-label">
+          <p>Innenraum Zustand</p>
+        </div>
+        <div class="car-detail-section-value">
+          <inspection-detail-status-icon [inspectionDetailStatus]= inspection.}}</></inspection-detail-status-icon>div>
+      </div> -->
+
+
+      <!-- AUSENSEITE -->
+      <div class="car-detail-section">
+        <div class="car-detail-section-title">
+          <div class="car-detail-section-title-icon">
+            <img class="svg-icon" src="assets/images/icons/car-sport-outline-svgrepo-com.svg">
+          </div>
+          <div class="car-detail-section-title-text">
+            <h2>Außenseite</h2>
+          </div>
+        </div>
+        <div class="car-detail-section-content">
+
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Windschutzscheibe</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.windschutzscheibe></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Wischer und Waschanlage</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.wischer_und_waschanlage></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Wischblätter</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.wischblatter></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Fahrzeugboden</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.fahrzeugboden></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- LENKUNG -->
+      <div class="car-detail-section">
+        <div class="car-detail-section-title">
+          <div class="car-detail-section-title-icon">
+            <img class="svg-icon" src="assets/images/icons/steering-wheel-car-svgrepo-com.svg">
+          </div>
+          <div class="car-detail-section-title-text">
+            <h2>Lenkung</h2>
+          </div>
+        </div>
+        <div class="car-detail-section-content">
+
+          <div class="car-detail-section-content-item">
+            <div class="car-detail-section-label">
+              <p>Lenkungseinheit</p>
+            </div>
+            <div class="car-detail-section-value">
+              <inspection-detail-status-icon [inspectionDetailStatus]= inspection.lenkungseinheit></inspection-detail-status-icon>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <!-- OPTISCHE UNTERSUCHUNG  NACHTRÄGLICH ENTWICKELN -->
+    
+      <!-- <div class="car-section">
+        <h2>Außenseite</h2>
+        <p>Stoßstange vorne: {{ inspection.stossstange_vorne }}</p>
+        <p>Motorhaube: {{ inspection.motorhaube }}</p>
+        <p>Linker Kotflügel vorne: {{ inspection.linker_kotflugel_vorne }}</p>
+        <p>Rechter Kotflügel vorne: {{ inspection.rechter_kotflugel_vorne }}</p>
+        <p>Linke Tür vorne: {{ inspection.linke_tuer_vorne }}</p>
+        <p>Rechte Tür vorne: {{ inspection.rechte_tuer_vorne }}</p>
+        <p>Dach: {{ inspection.dach }}</p>
+        <p>Linke Tür hinten: {{ inspection.linke_tuer_hinten }}</p>
+        <p>Rechte Tür hinten: {{ inspection.rechte_tuer_hinten }}</p>
+        <p>Linker Kotflügel hinten: {{ inspection.linker_kotflugel_hinten }}</p>
+        <p>Rechter Kotflügel hinten: {{ inspection.rechter_kotflugel_hinten }}</p>
+        <p>Heckklappe: {{ inspection.heckklappe }}</p>
+        <p>Stoßstange hinten: {{ inspection.stossstange_hinten }}</p>
+      </div> -->
+</div>
+</div>

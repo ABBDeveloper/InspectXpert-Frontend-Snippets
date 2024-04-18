@@ -1,0 +1,31 @@
+<mat-card class="car-card" (click)= "navigateToInspectionDetails(inspection.id)">
+  <img class="card-thumbnail" [src]="inspection.thumbnail !== '' ? inspection.thumbnail : 'assets/images/default_thumbnail.jpg'">
+  <mat-card-content class="car-name">
+    <h3>{{ inspection.manufacturer }} {{ inspection.model }}</h3>
+    <div class="car-info-container">
+      <p class="car-general-info-label">Erstzulassung:</p>
+      &nbsp;
+      <p class="car-general-info-value">{{ inspection.constructionYear }}</p>
+    </div>
+   <div class="car-info-container">
+    <p class="car-general-info-label">Kilometerstand:</p>
+    &nbsp;
+    <p class="car-general-info-value">{{ inspection.mileage }} km</p>
+   </div>
+   <div class="car-info-container">
+    <p class="car-general-info-label">Kennzeichen:</p>
+    &nbsp;
+    <p class="car-general-info-value">{{ inspection.licensePlate }}</p>
+   </div>
+   <div class="car-info-container">
+    <p class="car-general-info-label">Fahrgest.Nr.:</p>
+    &nbsp;
+    <p class="car-general-info-value">{{ inspection.chassisNumber }}</p>
+   </div>
+   <div class="car-info-container">
+    <p class="car-general-info-label">Unters.-datum:</p>
+    &nbsp;
+    <p class="car-general-info-value">{{ inspection.inspectionDate }}</p>
+   </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,94 @@
+    <mat-stepper class="stepper" [linear]="false" orientation="horizontal"  [labelPosition]="'bottom'">
+        <ng-template matStepperIcon="edit">
+            <mat-icon [ngStyle]="{'color':' #77ff33'}">done</mat-icon>
+        </ng-template>
+        <mat-step  
+        label="Allgemeine Daten" 
+        class="step"
+        [stepControl]="generalInfoFormGroup"
+        errorMessage="Füllen Sie bitte alle Felder in diesem Schritt aus!">
+        <form   [formGroup]="generalInfoFormGroup">    
+            <div class="vehicle-general-data">
+                <mat-form-field appearance="outline">
+                    <mat-label>Hersteller</mat-label>
+                    <input matInput 
+                    [(ngModel)]= roadVehicle.manufacturer 
+                    formControlName="generalInfoCtrl111">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Model</mat-label>
+                    <input matInput 
+                    [(ngModel)]= roadVehicle.model 
+                    formControlName="generalInfoCtrl222">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Baujahr</mat-label>
+                    <mat-select 
+                    [(ngModel)]=roadVehicle.constructionYear
+                    formControlName="constructionYear">
+                        <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+                      </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Kennzeichen</mat-label>
+                    <input matInput 
+                    [(ngModel)]= roadVehicle.licensePlate 
+                    formControlName="generalInfoCtrl444">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Fahrgestellnummer</mat-label>
+                    <input matInput 
+                    [(ngModel)]= roadVehicle.chassisNumber 
+                    formControlName="generalInfoCtrl555">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Kilometerstand</mat-label>
+                    <input matInput  
+                    [(ngModel)]= roadVehicle.mileage 
+                    formControlName="generalInfoCtrl666">
+                </mat-form-field>       
+            </div>
+            <div class="navigation-buttons">
+                <button  mat-raised-button color="black" matStepperNext>Weiter</button>
+            </div>
+        </form>
+        </mat-step> 
+        <mat-step label="Optische Untersuchung" class="step">
+            <div class="optical-inspection">
+                <div class="optical-inspection-image">
+                    <div class="optical-inspection-selects-gruop">
+                         <mat-form-field class="optical-inspection-select"  *ngFor="let checkpoint of roadVehicle.opticalCheckpoints;  let index = index" id={{checkpoint.name}} >
+                            <mat-select class="optical-inspection-option"  required [(ngModel)]= roadVehicle.opticalCheckpoints[index].value>
+                                <mat-option *ngFor="let qGrade of qualityGrades" value={{qGrade}}>{{qGrade}}</mat-option>
+                            </mat-select>
+                        </mat-form-field> 
+                    </div>
+                </div>
+                
+                <mat-card class="quality-grade-legend">
+                    <span >
+                        <p>O : Originallack </p>
+                        <p>N : Nachlackierung  </p>
+                        <p>O - - : Delle im Originallack</p>
+                        <p>O - : Kratzer im Originallack</p>
+                        <p>N - - : Delle im Lack, welcher schon Mal nachlackiert worden ist</p>
+                        <p>N - : Kratzer im Lack, welcher schon Mal nachlackiert worden ist</p>
+                    </span>
+                </mat-card>
+                <div class="navigation-buttons">
+                    <button  mat-raised-button color="black" matStepperPrevious>Zurück</button>
+                    <button  mat-raised-button color="black" matStepperNext>Weiter</button>
+                </div>
+                
+            </div>
+        </mat-step>
+        <mat-step  label="Foto-Dokumentation hinzufügen" class="step"> 
+            <app-photo-upload #photoUpload></app-photo-upload>
+            
+            <div class="navigation-buttons">
+                <button  mat-raised-button color="black" matStepperPrevious>Zurück</button>
+                <button  mat-raised-button color="black" (click)="onSubmit()">Speichern</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+

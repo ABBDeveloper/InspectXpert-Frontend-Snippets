@@ -1,0 +1,11 @@
+<mat-card class="inspection-list-item" (click)= "navigateToInspectionDetails(inspection.id)">
+    <mat-card-content class="car-info-container">
+        <p class="car-info">{{ inspection.manufacturer }}</p>        
+        <p class="car-info">{{ inspection.model }}</p>
+        <p class="car-info">{{ inspection.constructionYear }}</p>
+        <p class="car-info">{{ inspection.mileage }} km</p>
+        <p class="car-info">{{ inspection.chassisNumber }}</p>
+        <p class="car-info">{{ inspection.licensePlate }}</p>
+        <p class="car-info">{{ inspection.inspectionDate }}</p>
+    </mat-card-content>
+</mat-card>

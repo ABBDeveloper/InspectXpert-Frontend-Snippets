@@ -1,0 +1,11 @@
+<div class="app-wraper">
+    <toolbar *ngIf="isAuth"></toolbar>
+
+    <div class="app">
+        <action-bar *ngIf="isAuth"></action-bar>
+        <section class="app-content">
+            <router-outlet class="app-content-body"></router-outlet>
+        </section>
+    </div>
+    
+</div>

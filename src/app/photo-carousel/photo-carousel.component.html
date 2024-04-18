@@ -1,0 +1,16 @@
+  <div class="photo-carousel">
+    <div *ngIf="photos.length > 0; else defaultPhoto" class="photo-display">
+      <img [src]="photos[currentPhotoIndex]" alt="Current Photo">
+      <button (click)="prevPhoto()" class="carousel-button left">&lt;</button>
+      <button (click)="nextPhoto()" class="carousel-button right">&gt;</button>
+    </div>
+    <ng-template #defaultPhoto class="default-photo-display">
+      <img [src]="'assets/images/default_thumbnail.jpg'" alt="Default Photo">
+    </ng-template>
+    <div *ngIf="photos.length > 0" class="photo-slider">
+      <div *ngFor="let photo of photos; let i = index" (click)="showPhoto(i)" class="slider-item" [ngClass]="{'selected': i === currentPhotoIndex}">
+        <img [src]="photo" alt="Photo {{ i + 1 }}">
+      </div>
+    </div>
+  </div>
+  

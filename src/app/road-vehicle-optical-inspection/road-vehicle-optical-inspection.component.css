@@ -1,0 +1,180 @@
+:host{
+    display: flex;
+    justify-content: center;
+}
+
+.stepper{
+    max-width: 768px;
+    width: 100%;
+}
+
+.vehicle-general-data{
+    display: flex; 
+    flex-direction: column;
+}
+
+.optical-inspection-image{
+    background-image: url(/assets/images/car.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: auto ;
+    height: 598px;
+    max-height: 598px;
+    margin-top: 3em;
+    filter: grayscale(100%);
+}
+
+.optical-inspection-selects-gruop{
+    display:flex;
+    justify-content: center;
+    background-color: rgba(126, 252, 0, 0);
+    width: 772px ;
+    height: 598px;
+    max-height: 598px;
+}
+
+.optical-inspection-select{
+    width:4rem;
+    height: 3rem;
+    position: fixed;
+    font-size: 1rem;
+    background-color:#aaa;
+    border-radius: 30px;   
+
+    .mat-form-field-underline{
+        width: 0%;
+    }
+
+    .mat-select-value{
+        padding-left: 15px;
+    }
+}
+
+.quality-grade-legend{
+    vertical-align: bottom;
+    margin-top: 0.8rem;
+    height: min-content;
+}
+
+h2{
+    display: flex;
+    align-content: flex-start;
+    justify-content: center;
+    margin-top: 2em;
+    margin-bottom: 4em;
+    font-size: 1,5em;
+}
+
+.navigation-buttons {
+    margin: 6px;
+    margin-bottom: 0px;
+    float: right;
+}
+
+.mat-raised-button{
+    margin: 6px;
+    border-radius: 24px;
+}
+
+.optical-inspection-select{
+    position: absolute;
+}
+
+
+/* Mitte */
+mat-form-field#stossStangeVorne{
+    margin-top: 38px;
+    margin-right: 50px;
+}
+
+mat-form-field#motorhaube{
+    margin-top: 173px;
+    margin-right: 50px;
+}
+
+mat-form-field#dach{
+    margin-top: 320px;
+    margin-right: 50px;
+}
+
+mat-form-field#heckklappe{
+    margin-top: 430px;
+    margin-right: 50px;
+}
+
+mat-form-field#stossStangeHinten{
+    margin-top: 510px;
+    margin-right: 50px;
+}
+
+/* Links */
+mat-form-field#linkerKotfluegelVorne{
+    margin-top: 173px;
+    margin-right: 530px;
+}
+
+mat-form-field#linkeTuerVorne{
+    margin-top: 255px;
+    margin-right: 530px;
+}
+
+mat-form-field#linkeTuerHinten{
+    margin-top: 330px;
+    margin-right: 530px;
+}
+
+mat-form-field#linkerKotfluegelHinten{
+    margin-top: 425px;
+    margin-right: 530px;
+}
+
+/* Rechts */
+mat-form-field#rechterKotfluegelVorne{
+    margin-top: 173px;
+    margin-left: 420px;
+}
+
+mat-form-field#rechteTuerVorne{
+    margin-top: 255px;
+    margin-left: 420px;
+}
+
+mat-form-field#rechteTuerHinten{
+    margin-top: 330px;
+    margin-left: 420px;
+}
+
+mat-form-field#rechterKotfluegelHinten{
+    margin-top: 425px;
+    margin-left: 420px;
+}
+
+.foto-ducumentation-container{
+    margin-top: 3rem;
+}
+
+.images-preview-container{
+    margin: 1.5rem 0rem ;
+    min-height:7rem ;
+    display: grid;
+    grid-template-columns: auto auto auto auto ;
+
+    
+}
+
+ /* Container needed to position the button. Adjust the width as needed */
+.image-container {
+    margin: 5px;
+}
+
+  /* Style the button and place it in the middle of the container/image */
+.image-container .btn {
+    position: absolute;
+    font-size: 0.5rem;
+    transform: scale(0.7) translate(-80%, -50%);    
+}
+
+.image-container .btn:hover {
+    background-color: black;
+} 

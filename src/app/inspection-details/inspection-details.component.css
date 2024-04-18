@@ -1,0 +1,176 @@
+:host{
+  display: flex;
+  justify-content: center;
+}
+
+.inspection-details-wrapper{
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.inspection-details{
+  overflow: auto;
+  width: auto;
+}
+
+.inspection-details-toolbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border:#eeeee4 solid 1px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px 20px 10px 20px;
+
+  #toolbar-inspection-status{
+    display: inline-flex;
+    justify-self: start;
+    padding-left: 10px;
+
+    .inspection-status{
+      font-size: larger;
+      margin-block: auto;
+    }
+
+    .status-fahrtuechtig {
+      color: green;
+    }
+    
+    .status-reparaturbeduerftig {
+        color: orange;
+    }
+    
+    .status-nichtfahrtuechtig {
+        color: red;
+    }
+  }
+
+  #toolbar-button-actios{
+    display: inline-flex;
+    justify-self: end;
+
+    .toolbar-button{
+      border: none;
+      background-color: transparent;
+      margin: 0px 5px;
+
+      img{
+        height: 22px;
+      }
+    }
+  }
+}
+
+.stage-area {
+  display: grid; 
+  grid-template-columns: 65% 1fr;
+  flex-direction: row; 
+}
+
+#photo-carousel{
+  margin:10px 20px 20px 20px;
+}
+.car-info{
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  padding: 25px 30px;
+  margin: 10px 20px 20px 20px;
+  border: #eeeee4 solid 1px;
+  border-radius: 10px;
+}
+
+.car-info-brand-and-model{
+  padding-bottom: 10px;
+  font-size: 25px;
+  white-space: nowrap; /* Verhindert, dass der Text umgebrochen wird */
+  overflow: hidden; /* Versteckt den Text, der über die begrenzte Breite hinausgeht */
+  text-overflow: ellipsis; /* Zeigt "..." an, wenn der Text abgeschnitten ist */
+}
+
+.car-general-info {
+  display: flex;
+  flex-direction: column;
+  padding: auto;
+}
+
+.car-general-info-item{
+  flex-direction: column;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding-bottom: 10px;
+}
+
+.car-general-info-item-icon{
+  grid-area: 1 / 1 / 2 / 2; 
+  padding-right: 10px;
+  height: 30px;
+  width:auto ;
+}
+
+img{
+  height: 25px;
+  width:auto ;
+}
+
+.car-general-info-item-label{
+  grid-area: 1 / 2 / 2 / 3;
+  font-size: 16px;
+  color: rgb(117, 117, 117);
+}
+
+.car-general-info-item-value{
+  grid-area: 2 / 2 / 3 / 3; 
+  font: 16px;
+}
+
+.car-general-info-item-icon .car-general-info-item-label{
+  margin-bottom: 5px;
+}
+
+.car-general-info-item-label p {
+  color:rgb(172, 40, 40);
+}
+
+.car-details{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 30px;
+  margin: 20px;
+  width: auto;
+  border: #eeeee4 solid 1px;
+  border-radius: 10px;
+}
+
+.car-detail-section{
+  display: grid;
+  grid-template-columns: 30% 70%;
+  margin-bottom: 30px;
+}
+
+.car-detail-section-title{
+  display: grid;
+  grid-template-columns: 20% auto;
+}
+
+.car-detail-section-title-icon{
+  padding:0px 10px 10px 0px;
+  height: 30px;
+  width: auto;
+}
+
+.car-detail-section-content{
+  padding-left: 10px;
+}
+
+.car-detail-section-content-item{
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
+hr {
+  border: 1px solid #7a7a7a; 
+  margin: 20px 0;
+}
